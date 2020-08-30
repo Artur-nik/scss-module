@@ -101,7 +101,7 @@
     } 
 
     //! Ошибки type
-    //? Выдаем ошибку если ключ $media-type не верный
+    //? Выдаем ошибку, если ключ $media-type не верный
     @if ($media-type-keys or $type != null) == true {
         @warn "$media-type value: #{map-keys($media-type)}";
     }

@@ -5,6 +5,28 @@
  
 
 @mixin media($bp: null, $mod: min, $type: null) {
+    //! Проверка переменных
+    //? Есть ли переменная: $media-type, если нет то задаем default переменную
+    @if not(variable-exists(media-type)) {
+        $media-type: (
+          'screen': 'screen',
+          'print': 'print',
+          'handheld': 'handheld',
+          'landscape': '(orientation: landscape)',
+          'portrait': '(orientation: portrait)',
+          'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+          'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
+        ) !global;
+    }
+    //? Проверка есть ли переменная $media-breakpoints, если нет то задаем default переменную
+    @if not(variable-exists(media-breakpoints)) {
+        $media-breakpoints: (
+            sm: 576rem,       
+            md: 768px,          
+            lg: 992px,          
+            xl: 1200px             
+        ) !global;
+    } 
     //? Значения модификатора (можно расширить)
     $modification: (
         min,

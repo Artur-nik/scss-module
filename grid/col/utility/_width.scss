@@ -1,0 +1,25 @@
+﻿//? Placeholder width
+%col-width {
+    width: 100%;
+}
+@each $var in map-keys($media-breakpoints) {
+    @include col-media($var){
+        %col-width-#{$var} {
+            width: 100%;
+        }
+    }
+}
+@mixin _grid-width($media, $width) {
+    @if $width == width {
+        //? Вывод без $media
+        @if $media == null{
+            @extend %col-width;
+        }   
+        //? Вывод без $media
+        @if $media != null{
+            @include col-media($media){
+                @extend %col-width-#{$media};
+            }
+        }         
+    }
+}

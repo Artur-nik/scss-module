@@ -1,0 +1,15 @@
+﻿//? Placeholder col-0
+%col-0 {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+@each $breakpoints-value in map-keys($media-breakpoints) {
+    @include col-media($breakpoints-value){
+        %col-0-#{$breakpoints-value} {
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+    }
+}

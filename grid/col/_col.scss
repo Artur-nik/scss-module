@@ -1,0 +1,146 @@
+﻿//! Проверка переменных
+//? Есть ли переменная: $gutters, если нет то задаем default переменную 
+@if not(variable-exists(columns)) {
+    $columns: 12 !global;
+} 
+@if not(variable-exists(gutters)) {
+    $gutters: 30px !global;
+} 
+//? Проверка есть ли переменная $media-breakpoints, если нет то задаем default переменную
+@if not(variable-exists(media-breakpoints)) {
+    $media-breakpoints: (
+        sm: 576px,       
+        md: 768px,          
+        lg: 992px,          
+        xl: 1200px             
+    ) !global;
+} 
+//* Разделяем gutters на два 30/2=15
+$gutters-value: $gutters / 2;
+
+@import 'utility/media';
+@import 'utility/width';
+@import 'utility/gutters';
+@import 'utility/col-auto';
+@import 'utility/col-0';
+@import 'utility/col-columns';
+@import 'config';
+//info @include col(
+//info     1 value - 0 - $columns (12), auto
+//info     2 value - null, $media-breakpoints 
+//info     3 value - extend, no-extend
+//info     4 value - gutters, gutters-left, gutters-right, no-gutters
+//info     5 value - width or no-width
+//info     6 value - true or false (important)
+//info );
+
+@mixin col(
+    $col: $col-columns, 
+    $media: $col-media,
+    $extend: $col-extend, 
+    $gutters: $col-gutters, 
+    $width: $col-width, 
+    $important: $col-important
+    ){
+    @if type-of($col) == number {
+        @if $col == 0{
+            @if $extend == no-extend {
+                @include _grid-no-extend($media, $gutters, $width, $important) {
+                    flex-basis: 0;
+                    flex-grow: 1;
+                    max-width: 100%;
+                }
+                //! Вывод ошибки important:
+                 @if $important == true{
+                     @warn '$important not supported';
+                 }
+            }@else {
+                @include _grid-width($media, $width);
+                @include _grid-gutters($gutters, $media, $extend, $important);
+                @if $media == null{
+                    @extend %col-0;
+                } @else {
+                    @extend %col-0-#{$media}; 
+                }    
+                //! Вывод ошибки important:
+                @if $important == true{
+                    @warn '$important not supported';
+                }
+            }   
+
+        } 
+        @else if $col <= $columns{
+            @if $extend == no-extend {
+                @if $important == true {
+                    @include _grid-no-extend($media, $gutters, $width, $important) {
+                        flex: 0 0 (100% / ($columns / $col)) !important;
+                        max-width: 100% / ($columns / $col) !important;  
+                    }
+                }@else {
+                    @include _grid-no-extend($media, $gutters, $width, $important) {
+                        flex: 0 0 (100% / ($columns / $col));
+                        max-width: 100% / ($columns / $col);   
+                    }
+                }
+            }@else {
+                @include _grid-width($media, $width);
+                @include _grid-gutters($gutters, $media, $extend, $important);
+                @if $important == true {
+                    @if $media == null {
+                        @extend %col-#{$col}-important;
+                    } @else {
+                        @extend %col-#{$col}-#{$media}-important; 
+                    }           
+                }
+                @else {
+                    @if $media == null {
+                        @extend %col-#{$col};
+                    } @else {
+                        @extend %col-#{$col}-#{$media}; 
+                    }
+                }
+            }      
+        } 
+        @else {
+            @warn The number of columns cannot exceed #{$columns};
+        } 
+    } 
+    @else if $col == auto {
+        @if $extend == no-extend {
+            @include _grid-no-extend($media, $gutters, $width, $important) {
+                flex: 0 0 auto;
+                width: auto;
+                max-width: 100%; 
+                //! Вывод ошибки important:
+                @if $important == true{
+                    @warn '$important not supported';
+                }
+            }
+        }@else {
+            @include _grid-width($media, $width);
+            @include _grid-gutters($gutters, $media, $extend, $important);
+            @if $media == null{
+                @extend %col-auto;
+            } @else {
+                @extend %col-auto-#{$media}; 
+            }    
+            //! Вывод ошибки important:
+            @if $important == true{
+                @warn '$important not supported';
+            }
+        }     
+    }
+    @else {
+        @warn 'col () only takes values - auto, 0 - #{$columns}';
+    }
+    //! Проверка на ошибки:
+    @if not($width == width or $width == no-width){
+        @warn 'width value == width and no-width'; 
+    }
+    @if not($extend == extend or $extend == no-extend){
+        @warn 'extend value == extend and no-extend'; 
+    }
+    @if index((gutters, gutters-left, gutters-right, no-gutters), $gutters) == null{
+        @warn 'Gutters value == gutters, gutters-left, gutters-right, no-gutters';
+    }
+}

@@ -210,8 +210,8 @@ CSS:
  
 @media (min-width: 1200px) {
 	.test-col-value {
-	  	width: 100%;
-	  	padding-left: 15px;
+		width: 100%;
+		padding-left: 15px;
 	  	padding-right: 15px;
 	  	flex: 0 0 41.66667%;
 	  	max-width: 41.66667%;

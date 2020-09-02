@@ -11,7 +11,7 @@
     1 value - 0 - $columns (12), auto
     2 value - null, $media-breakpoints 
     3 value - extend, no-extend
-    4 value - gutters, gutters-left, gutters-right, no-gutters
+    4 value - gutters, gutters-left, gutters-right, no-gutters, off-gutters
     5 value - width or off-width
     6 value - true or false (important)
 );
@@ -210,8 +210,8 @@ CSS:
  
 @media (min-width: 1200px) {
 	.test-col-value {
-	  	width: 100%;
-	  	padding-left: 15px;
+		width: 100%;
+		padding-left: 15px;
 	  	padding-right: 15px;
 	  	flex: 0 0 41.66667%;
 	  	max-width: 41.66667%;

@@ -9,6 +9,10 @@
 %gutters-right {
     padding-right: $gutters-value;
 }
+%no-gutters {
+    padding-left: 0;
+    padding-right: 0;
+}
 @each $value in map-keys($media-breakpoints) {
     @include col-media($value){
         %gutters-#{$value} {
@@ -32,6 +36,14 @@
         }
     }
 }
+@each $value in map-keys($media-breakpoints) {
+    @include col-media($value){
+        %no-gutters-#{$value} {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+}
 //* Mixin gutters
 @mixin _grid-gutters($value, $media, $extend, $important) { 
     //? Вывод без $media
@@ -42,6 +54,8 @@
             @extend %gutters-left;
         } @else if $value == gutters-right{
             @extend %gutters-right;
+        } @else if $value == no-gutters{
+            @extend %no-gutters;
         }
     }
     //? Вывод с $media
@@ -53,6 +67,8 @@
                 @extend %gutters-left-#{$media};
             } @else if $value == gutters-right{
                 @extend %gutters-right-#{$media};
+            } @else if $value == no-gutters{
+                @extend %no-gutters-#{$media};
             }
         }
     }    
@@ -71,6 +87,9 @@
             padding-left: $gutters-value;
         } @else if $gutters == gutters-right{
             padding-right: $gutters-value;
+        } @else if $gutters == no-gutters{
+            padding-right: 0;
+            padding-left: 0;
         }
         @content;
     }

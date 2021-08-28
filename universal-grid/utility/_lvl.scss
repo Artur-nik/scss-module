@@ -1,0 +1,148 @@
+// Микс 
+@mixin _4pt__grid-lvl(
+    $lvl: $_4pt__lvl,
+    $placeholder: null,
+    $media: null,
+    $mode: normal,
+    $grid-mode: $_4pt__grid-mode,
+    $grid-type: $_4pt__grid-type,
+    $grid-type-breakpoints: null,
+    $value...
+){
+    @if $media == null{
+        @if $lvl == 1 {
+            @if $grid-mode == normal {
+                @if $grid-type == fixed{
+                    @extend %#{$placeholder};
+                }
+                @else if $grid-type == responsive{
+                    @extend %#{$placeholder}-#{$grid-type-breakpoints};
+                }
+            }
+            @else if $grid-mode == fixed {
+                @if $grid-type == fixed{
+                    @extend %#{$placeholder}-fixed;
+                }
+                @else if $grid-type == responsive{
+                    @extend %#{$placeholder}-#{$grid-type-breakpoints}-fixed;
+                }
+            }
+            @else if $grid-mode == hybrid {
+                @if $grid-type == fixed{
+                    @if $mode == normal {
+                        @extend %#{$placeholder};
+                    }
+                    @else if $mode == fixed{
+                        @extend %#{$placeholder}-fixed;
+                    }   
+                }
+                @else if $grid-type == responsive{
+                    @if $mode == normal {
+                        @extend %#{$placeholder}-#{$grid-type-breakpoints};
+                    }
+                    @else if $mode == fixed{
+                        @extend %#{$placeholder}-#{$grid-type-breakpoints}-fixed;
+                    }   
+                }
+            }
+        } 
+        @else if $lvl == 2{
+            @if $grid-mode == normal or $grid-mode == hybrid {
+                @each $property, $value in keywords($value) {
+                    #{$property}: #{$value}
+                }
+            }
+            @else if $grid-mode == fixed or $grid-mode == hybrid {
+                @each $property, $value in keywords($value) {
+                    #{$property}: #{$value}
+                }                
+            }
+        }
+        @else if $lvl == 3{
+            @each $property, $value in keywords($value) {
+                #{$property}: #{$value} !important;
+            }
+        }
+        @else {
+            @warn '$lvl accepts numbers 1 2 3
+                1lvl - Placeholder Selectors
+                2lvl - Outputting a value inside a selector
+                3lvl - Outputting a value inside a selector + !important (Absolute value)
+            ';
+        }
+    } @else {
+        @if $lvl == 1 {
+            @if $grid-mode == normal {
+                @if $grid-type == fixed{
+                    @include media($media){
+                        @extend %#{$placeholder};
+                    }
+                }
+                @else if $grid-type == responsive{
+                    @include media($media){
+                        @extend %#{$placeholder}-#{$grid-type-breakpoints};
+                    }
+                }
+            }
+            @else if $grid-mode == fixed {
+                @if $grid-type == fixed{
+                    @include media($media){
+                        @extend %#{$placeholder}-fixed;
+                    }
+                }
+                @else if $grid-type == responsive{
+                    @include media($media){
+                        @extend %#{$placeholder}-#{$grid-type-breakpoints}-fixed;
+                    }
+                }
+            }
+            @else if $grid-mode == hybrid {
+                @if $grid-type == fixed{
+                    @if $mode == normal {
+                        @include media($media){
+                            @extend %#{$placeholder};
+                        }
+                    }
+                    @else if $mode == fixed{
+                        @include media($media){
+                            @extend %#{$placeholder}-fixed;
+                        }
+                    }   
+                }
+                @else if $grid-type == responsive{
+                    @if $mode == normal {
+                        @include media($media){
+                            @extend %#{$placeholder}-#{$grid-type-breakpoints};
+                        }
+                    }
+                    @else if $mode == fixed{
+                        @include media($media){
+                            @extend %#{$placeholder}-#{$grid-type-breakpoints}-fixed;
+                        }
+                    }   
+                }
+            }
+        } 
+        @else if $lvl == 2{
+            @include media($media){
+                @each $property, $value in keywords($value) {
+                    #{$property}: #{$value};
+                }
+            }
+        }
+        @else if $lvl == 3{
+            @include media($media){
+                @each $property, $value in keywords($value) {
+                    #{$property}: #{$value} !important;
+                }
+            }
+        }
+        @else {
+            @warn '$lvl accepts numbers 1 2 3
+                1lvl - Placeholder Selectors
+                2lvl - Outputting a value inside a selector
+                3lvl - Outputting a value inside a selector + !important (Absolute value)
+            ';
+        }
+    }
+}

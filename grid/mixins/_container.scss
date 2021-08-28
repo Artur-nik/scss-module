@@ -1,0 +1,58 @@
+@mixin container(
+    $value: null,
+    $type: $_sistem__grid-mode
+    $lvl
+) {
+    //* Вывод полного цикла 
+    @if $value == 'full-cycle'{
+        //* Вывод результата вычислений на препроцессоре Scss
+        @if $_grid-result == scss {
+            width: _grid-result-size-container();
+            @each $breakpoints in map-keys($_grid-breakpoints) {
+                @include _grid-media($breakpoints){
+                    //
+                    @if $type == normal {
+                        max-width: _grid-result-size-container($breakpoints);
+                    }
+                    //
+                    @else if $type == fixed {
+                        width: _grid-result-size-container($breakpoints);       
+                    }
+                }
+            }
+        }
+        //* Вывод результата вычислений на переменных css
+        @else {
+            @if $value == 'full-cycle'{
+                width: var(--container);      
+            }   
+        }
+    }
+    //* Вывод размера контейнера в определенной контрольной точке
+    @else if map-has-key($_grid-breakpoints, $value) {
+        @if $_grid-result == scss {
+            // 
+            @if $type == normal {
+                width:100%;
+                @include _grid-media($value){
+                    max-width: _grid-result-size-container($value);
+                }
+            }
+            //
+            @else if $type == fixed {
+                @include _grid-media($value){
+                    width: _grid-result-size-container($value);
+                }
+            }
+        }
+        @else {
+            width: var(--container-#{$value}); 
+        }
+    }
+    @else {
+        @warn 'The container only takes values: 
+            "full-cycle"   
+            breakpoints - #{map-keys($_grid-breakpoints)}
+        ';
+    }          
+}

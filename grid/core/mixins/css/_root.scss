@@ -1,0 +1,11 @@
+@if $_grid-result == css {
+    :root {
+        --container: #{$_grid-default-size-container};
+        @each $breakpoints in map-keys($_grid-breakpoints) {
+            @include _grid-media($breakpoints){
+                --container: #{_grid-result-size-container($breakpoints)};
+                --container-#{$breakpoints}: #{_grid-result-size-container($breakpoints)};
+            }
+        }
+    }
+}

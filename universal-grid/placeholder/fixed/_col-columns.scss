@@ -1,0 +1,35 @@
+//? Placeholder %col-(columns-value) 
+@each $col in $_4pt__columns-value {
+    @if $_4pt__grid-mode == normal or $_4pt__grid-mode == hybrid {
+        %col-#{$col} {
+            flex: 0 0  col($col, normal);
+            max-width: col($col, normal);  
+        }
+    }
+    //
+    @if $_4pt__grid-mode == fixed or $_4pt__grid-mode == hybrid {
+        %col-#{$col}-fixed {
+            flex: 0 0 col($col, fixed);
+            max-width: col($col, fixed);;  
+        }
+    }
+}
+@each $breakpoints-value in map-keys($media-breakpoints) {
+    @include media($breakpoints-value){
+        @each $col in $_4pt__columns-value {
+            @if $_4pt__grid-mode == normal or $_4pt__grid-mode == hybrid {
+                %col-#{$col}-#{$breakpoints-value} {
+                    flex: 0 0 col($col, normal);
+                    max-width: col($col, normal);  
+                }
+            }
+            //
+            @if $_4pt__grid-mode == fixed or $_4pt__grid-mode == hybrid {
+                %col-#{$col}-#{$breakpoints-value}-fixed {
+                    flex: 0 0 col($col, fixed, $breakpoints-value);
+                    max-width: col($col, fixed, $breakpoints-value);  
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+$_grid-result:css;
+@if variable-exists('_grid-result') == false{
+    $_grid-result:scss;
+}
+//*  scss
+//*  css
+//! ===================================
+$_grid-mode: hybrid;
+//*  normal  
+//*  fixed   - работает только внутри контейнера
+//*  hybrid
+//! ===================================
+$_grid-breakpoints:() !default;
+$_grid-breakpoints: (
+    sm: 576px,       
+    md: 768px,          
+    lg: 992px,          
+    xl: 1200px             
+);
+$_grid-gutters: 30px;
+$_grid-default-size-container:100%;
+//$grid-size-container:() !default;
+//$grid-size-container:(
+//    sm: 540px,
+//    md: 720px,
+//    lg: 960px,
+//    xl: 1140px
+//);

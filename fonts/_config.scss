@@ -1,0 +1,104 @@
+﻿//* Проверка валидации атрибутов согласно списку $validation-attribute в _validation-font.scss
+$validation-font-attribute:true;    //* true / false 
+//* Проверка валидации значений атрибутов согласно списку $validation-value в _validation-font.scss
+$validation-font-value:true;        //* true / false 
+//! Внимание отключение проверки атрибутов и значений может привести к ошибке в браузере
+//*
+$fonts:(
+'Open Sans': (
+    family: "'Open Sans'",
+    style: normal,
+    weight: 400,
+    display: swap,
+    smooth: (auto, grayscale),
+    src:(     
+        local: (
+            'Open Sans Regular 1', 
+        ),
+        url:(
+            'https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVp0bbck.woff2',
+            'https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVp0bbck.woff',
+            'https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVp0bbck.eot?#iefix',
+        )
+    ),
+    unicode-range:('U+0102-0103', 'U+0110-0111', 'U+0128-0129')
+),
+'Open Sans Bold': (
+    family: "'Open Sans'",
+    style: normal,
+    weight: 900,
+    display: swap, 
+    src:(  
+        local:(
+            'Open Sans Bold',
+            'OpenSans-Bold',
+            'OpenSans-Bold regasd'
+        ),
+        url:(
+            'https://fonts.gstatic.com/s/opensans/v17/mem8YaG.woff2',
+            'https://fonts.gstatic.com/s/opensans/v17/mem8YaG.svg',
+        ),
+    ),
+    unicode-range: ('U+0102-0101', 'U+0110-013', 'U+0128-0000')
+),
+'Open Sans l': (
+    family: "'Open Sans'",
+    style: normal,
+    weight: 700,
+    display: swap, 
+    //smooth: auto,
+    src:(  
+        local:(
+            'Open Sans l',
+            'OpenSans-l-2d',
+            'OpenSans-l-3',
+            'OpenSans-l-4'
+        ),
+        url:(
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff2',
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff',
+        ),  
+    ),
+    unicode-range: ('U+0102-0103', 'U+0110-0111')
+)
+,
+'Open Sans 2l': (
+    family: "'Open Sans'",
+    style: normal,
+    weight: 600,
+    display: swap, 
+    src:(  
+        local:(
+            'Open Sans 2l',
+            'OpenSans-2l'
+        ),
+        url:(
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff2',
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff',
+        ),
+    ),
+    unicode-range: ('U+0102-0103', 'U+0110-0111', 'U+0128-0129', 'U+0128-0129')
+)
+,
+'Open Sans 3l': (
+    family: "'Open Sans'",
+    style: normal,
+    weight: 200,
+    display: swap, 
+    src:(  
+        local:(
+            'Open Sans 3l',
+            'OpenSans-3l'
+        ),
+        url:(
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff2',
+            'https://fonts.gstatic.com/s/op/mem8YaG.woff',
+        ),
+    ),
+    unicode-range: ('U+0102-0103', 'U+0110-0111', 'U+0128-0129', 'U+0128-0129', 'U+0128-0129', 'U+0128-0129')
+)
+);
+
+$test-fonts: (
+
+);

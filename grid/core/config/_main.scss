@@ -1,0 +1,11 @@
+//
+@if $_grid-mode == normal {
+    $_sistem__grid-mode: normal !global;
+}
+@else if $_grid-mode == fixed {
+    $_sistem__grid-mode: fixed !global; 
+}
+@else if $_grid-mode == hybrid {
+    $_sistem__grid-mode: $default-grid-type !global;
+}
+//

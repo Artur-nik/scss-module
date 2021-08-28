@@ -84,7 +84,7 @@
             @if $media-bp-keys == length($media-breakpoints){
                 $mod: max;
             } @else {
-                $media-width__result: "(min-width: #{$media-bp-width}) and (max-width: #{nth(map-values($media-breakpoints), length($media-breakpoints))})";
+                $media-width__result: "(min-width: #{$media-bp-width + 'px'}) and (max-width: #{nth(map-values($media-breakpoints), length($media-breakpoints)) + 'px'})";
             }
         }
         @if $mod == only {
@@ -92,7 +92,7 @@
                 $mod: min;
             } @else {
                 $media-width-only: nth(map-get($media-breakpoints, nth(nth($media-breakpoints, $media-bp-keys + 1), 1)), 1) - 0.01;
-                $media-width__result: "(min-width: #{$media-bp-width}) and (max-width: #{$media-width-only})";
+                $media-width__result: "(min-width: #{$media-bp-width + 'px'}) and (max-width: #{$media-width-only + 'px'})";
             }
         }
         @if $mod == min {

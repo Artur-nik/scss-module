@@ -1,0 +1,13 @@
+@import 'utility/return-size-container';
+@import 'utility/col-function';
+@import 'utility/columns-value';
+@import 'utility/lvl';
+
+//? Режим сетки: nornal
+    //? Тип сетки: fixed
+    @import 'placeholder/fixed/col-auto';
+    @import 'placeholder/fixed/col-0';
+    @import 'placeholder/fixed/col-columns';
+    @import 'col';
+    //? Тип сетки: responsive
+//! ======================================

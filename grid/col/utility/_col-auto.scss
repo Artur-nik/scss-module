@@ -1,11 +1,11 @@
-//? Placeholder col-auto 
+﻿//? Placeholder col-auto 
 %col-auto {
     flex: 0 0 auto;
     width: auto;
     max-width: 100%; 
 }
 @each $breakpoints-value in map-keys($media-breakpoints) {
-    @include media($breakpoints-value){
+    @include col-media($breakpoints-value){
         %col-auto-#{$breakpoints-value} {
             flex: 0 0 auto;
             width: auto;
